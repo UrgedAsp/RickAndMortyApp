@@ -1,0 +1,24 @@
+<div class="p-fluid p-d-flex p-jc-center">
+        <div class="p-col-11 p-sm-8 p-md-8 p-lg-8 p-xl-8">
+            <p-autoComplete placeholder="Buscar Personaje" id="Personaje" [(ngModel)]="selectedPersonaje" [suggestions]="filteredPersonajes" (completeMethod)="filterPersonaje($event)" field="name" [minLength]="1" (onSelect)="buscarPersonaje($event)"></p-autoComplete>
+        </div>
+        <p-button *ngIf="botonError" (onClick)="restaurarDatos()" class="p-col-1" icon="pi pi-times"></p-button>
+</div>
+
+<div class="p-grid">
+    <div *ngFor="let personaje of personajes" class="p-col-12 p-sm-12 p-md-6 p-lg-6 p-xl-4 p-mt-5 p-d-flex p-jc-center">
+        <p-card class="p-shadow-24" [header]="personaje.name" [style]="{width: '360px'}" styleClass="p-card-shadow">
+            <ng-template pTemplate="header">
+                <img alt="Card" [src]="personaje.image">
+            </ng-template>
+            <ul>
+                <li><b>Status: </b>{{personaje.status | titlecase}}</li>
+                <li><b>Species: </b>{{personaje.species | titlecase}}</li>
+                <li *ngIf="personaje.type != ''"><b>Type: </b>{{personaje.type | titlecase}}</li>
+                <li><b>Gender: </b>{{personaje.gender | titlecase}}</li>
+                <li><b>Origin: </b>{{personaje.origin.name | titlecase}}</li>
+                <li><b>Created: </b>{{personaje.created | date:'short'}}</li>
+            </ul>
+        </p-card>
+    </div>
+</div>

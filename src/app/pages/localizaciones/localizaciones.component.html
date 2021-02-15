@@ -1,0 +1,19 @@
+<div class="p-fluid p-d-flex p-jc-center">
+    <div class="p-col-11 p-sm-8 p-md-8 p-lg-8 p-xl-8">
+        <p-autoComplete placeholder="Buscar Localizacion" [(ngModel)]="selectedLocalizacion" [suggestions]="filteredLocalizaciones" (completeMethod)="filterLocalizacion($event)" field="name" [minLength]="1" (onSelect)="buscarLocalizacion($event)"></p-autoComplete>
+    </div>
+    <p-button *ngIf="botonError" (onClick)="restaurarDatos()" class="p-col-1" icon="pi pi-times"></p-button>
+</div>
+
+<div class="p-grid">
+    <div *ngFor="let localizacion of localizaciones" class="p-col-12 p-sm-12 p-md-6 p-lg-6 p-xl-4 p-mt-5 p-d-flex p-jc-center">
+        <p-card class="p-shadow-24" [header]="localizacion.name | titlecase" [style]="{width: '360px'}" styleClass="p-card-shadow">
+            <ul>
+                <li><b>Type: </b>{{localizacion.type | titlecase}}</li>
+                <li><b>Dimension: </b>{{localizacion.dimension | titlecase}}</li>
+                <li><b>Residents: </b> {{localizacion.residents}}</li>
+                <li><b>Created: </b>{{localizacion.created | date:'short'}}</li>
+            </ul>
+        </p-card>
+    </div>
+</div>

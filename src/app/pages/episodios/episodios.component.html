@@ -1,0 +1,25 @@
+<div class="p-fluid p-d-flex p-jc-center">
+    <div class="p-col-11 p-sm-8 p-md-8 p-lg-8 p-xl-8">
+        <p-autoComplete placeholder="Buscar Episodio" [(ngModel)]="selectedEpisodio" [suggestions]="filteredEpisodios"
+            (completeMethod)="filterEpisodio($event)" field="name" [minLength]="1" (onSelect)="buscarEpisodio($event)">
+        </p-autoComplete>
+    </div>
+    <p-button *ngIf="botonError" (onClick)="restaurarDatos()" class="p-col-1" icon="pi pi-times"></p-button>
+</div>
+<div class="p-grid">
+    <div *ngFor="let episodio of episodios" class="p-col-12 p-sm-12 p-md-6 p-lg-6 p-xl-4 p-mt-5 p-d-flex p-jc-center">
+        <p-card class="p-shadow-24" [header]="episodio.name" [style]="{width: '360px'}" styleClass="p-card-shadow">
+            <ul>
+                <li><b>Air Date: </b>{{episodio.air_date}}</li>
+                <li><b>Episode: </b>{{episodio.episode | titlecase}}</li>
+                <li><b>Characters: </b>{{episodio.characters}}</li>
+                <li><b>Created: </b>{{episodio.created | date:'short'}}</li>
+            </ul>
+            <ng-template pTemplate="footer">
+                <div class="p-grid p-jc-center">
+                    <p-button label="Buscar en YouTube" icon="pi pi-image" (onClick)="buscarYouTube(episodio.episode)"></p-button>
+                </div>
+            </ng-template>
+        </p-card>
+    </div>
+</div>
